@@ -37,9 +37,7 @@ Desirable:
 
 Optional:
 - Provide an AI mock viva chatbot for practice questions based on a student's project title or description.
-- Provide Zoom meeting integration as an alternative to Teams.
 - Retrieve calendar free/busy information if permissions and API access are available.
-- Compare the custom rule-based scheduler with an advanced optimisation solver such as OR-Tools.
 - Send automated reminder messages before the viva date and time.
 
 ## Information about this repository
