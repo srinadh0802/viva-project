@@ -1,6 +1,32 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const userEmail = email.toLowerCase().trim();
+
+    if (userEmail === "admin@viva.com") {
+      navigate("/admin/dashboard");
+    } else if (userEmail === "student@viva.com") {
+      navigate("/student/dashboard");
+    } else if (
+      userEmail === "staff@viva.com" ||
+      userEmail === "supervisor@viva.com" ||
+      userEmail === "marker@viva.com"
+    ) {
+      navigate("/staff/dashboard");
+    } else {
+      alert(
+        "Use one of these demo emails: admin@viva.com, student@viva.com, staff@viva.com"
+      );
+    }
+  };
+
   return (
     <main className="auth-page">
       <section className="auth-card">
@@ -12,31 +38,32 @@ function LoginPage() {
           Sign in to access your viva scheduling dashboard.
         </p>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleLogin}>
           <div className="form-group">
             <label>Email address</label>
-            <input type="email" placeholder="student@university.ac.uk" />
+            <input
+              type="email"
+              placeholder="admin@viva.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" />
+            <input type="password" placeholder="Enter any password for demo" />
           </div>
 
-          <div className="form-row">
-            <label className="checkbox-label">
-              <input type="checkbox" />
-              Remember me
-            </label>
-
-            <a href="#" className="small-link">
-              Forgot password?
-            </a>
+          <div className="demo-users">
+            <p>Demo users:</p>
+            <span>admin@viva.com</span>
+            <span>student@viva.com</span>
+            <span>staff@viva.com</span>
           </div>
 
-          <Link to="/roles" className="primary-button full-width">
+          <button type="submit" className="primary-button full-width">
             Login
-          </Link>
+          </button>
         </form>
       </section>
     </main>
