@@ -12,6 +12,10 @@ def create_app():
     CORS(app)
     db.init_app(app)
 
+    with app.app_context():
+        from viva_app import models
+        db.create_all()
+
     @app.route("/api/health")
     def health_check():
         return {
