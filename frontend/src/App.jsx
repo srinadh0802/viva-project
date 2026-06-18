@@ -6,6 +6,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
 import "./App.css";
+import AdminUsersPage from "./pages/AdminUsersPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/roles" element={<RoleSelectionPage />} />
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<AdminUsersPage />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/staff/dashboard" element={<StaffDashboard />} />
       </Routes>

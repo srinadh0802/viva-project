@@ -1,3 +1,6 @@
+// Link is used for moving between React pages without refreshing the browser
+import { Link } from "react-router-dom";
+
 function AdminDashboard() {
   return (
     <main className="dashboard-page">
@@ -8,8 +11,16 @@ function AdminDashboard() {
         </div>
 
         <nav className="sidebar-nav">
-          <a className="active">Dashboard</a>
-          <a>Users</a>
+          {/* Dashboard link shows the current admin dashboard page */}
+          <Link to="/admin/dashboard" className="active">
+            Dashboard
+          </Link>
+
+          {/* Users link opens the Admin User Management page */}
+          <Link to="/admin/users">
+            Users
+          </Link>
+
           <a>Rooms</a>
           <a>Assignments</a>
           <a>Viva Period</a>
@@ -58,14 +69,26 @@ function AdminDashboard() {
         <section className="dashboard-panel">
           <div>
             <h2>Next Admin Tasks</h2>
-            <p>Start by creating users, rooms, viva period and student-staff assignments.</p>
+            <p>
+              Start by creating users, rooms, viva period and student-staff
+              assignments.
+            </p>
+
+            {/* This button gives quick access to user creation page */}
+            <Link to="/admin/users" className="primary-button">
+              Manage Users
+            </Link>
           </div>
 
           <div className="task-list">
             <div className="task-item">Create student and staff accounts</div>
             <div className="task-item">Add viva rooms and building locations</div>
-            <div className="task-item">Assign each student to supervisor and second marker</div>
-            <div className="task-item">Generate and review timetable suggestions</div>
+            <div className="task-item">
+              Assign each student to supervisor and second marker
+            </div>
+            <div className="task-item">
+              Generate and review timetable suggestions
+            </div>
           </div>
         </section>
       </section>
