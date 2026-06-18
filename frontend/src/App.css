@@ -188,6 +188,16 @@ a {
   box-shadow: 0 0 0 4px rgba(83, 110, 212, 0.12);
 }
 
+.error-message {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .form-row {
   display: flex;
   align-items: center;

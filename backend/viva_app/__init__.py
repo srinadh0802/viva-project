@@ -16,8 +16,9 @@ def create_app():
         from viva_app import models
         db.create_all()
 
-    from viva_app.routes import user_bp, room_bp, viva_period_bp
-
+    from viva_app.routes import auth_bp, user_bp, room_bp, viva_period_bp
+    
+    app.register_blueprint(auth_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(room_bp)
     app.register_blueprint(viva_period_bp)

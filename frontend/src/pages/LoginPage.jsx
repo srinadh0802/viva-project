@@ -3,27 +3,47 @@ import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    setErrorMessage("");
 
-    const userEmail = email.toLowerCase().trim();
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    if (userEmail === "admin@viva.com") {
-      navigate("/admin/dashboard");
-    } else if (userEmail === "student@viva.com") {
-      navigate("/student/dashboard");
-    } else if (
-      userEmail === "staff@viva.com" ||
-      userEmail === "supervisor@viva.com" ||
-      userEmail === "marker@viva.com"
-    ) {
-      navigate("/staff/dashboard");
-    } else {
-      alert(
-        "Use one of these demo emails: admin@viva.com, student@viva.com, staff@viva.com"
-      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.error || "Login failed");
+        return;
+      }
+
+      localStorage.setItem("viva_user", JSON.stringify(data.user));
+
+      if (data.user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (data.user.role === "student") {
+        navigate("/student/dashboard");
+      } else if (data.user.role === "staff") {
+        navigate("/staff/dashboard");
+      } else {
+        setErrorMessage("Unknown user role");
+      }
+    } catch (error) {
+      setErrorMessage("Unable to connect to backend server");
     }
   };
 
@@ -51,14 +71,21 @@ function LoginPage() {
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter any password for demo" />
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
           </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <div className="demo-users">
             <p>Demo users:</p>
-            <span>admin@viva.com</span>
-            <span>student@viva.com</span>
-            <span>staff@viva.com</span>
+            <span>admin@viva.com / admin123</span>
+            <span>student@viva.com / student123</span>
+            <span>staff@viva.com / staff123</span>
           </div>
 
           <button type="submit" className="primary-button full-width">
