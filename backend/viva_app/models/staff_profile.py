@@ -18,6 +18,8 @@ class StaffProfile(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "full_name": self.user.full_name if self.user else None,
+            "email": self.user.email if self.user else None,
             "staff_number": self.staff_number,
             "department": self.department,
             "office_location": self.office_location

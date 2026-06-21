@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RoleSelectionPage from "./pages/RoleSelectionPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
-import StaffDashboard from "./pages/StaffDashboard";
+import StaffDashboard from "./pages/staff";
 import "./App.css";
 import AdminUsersPage from "./pages/AdminUsersPage";
 

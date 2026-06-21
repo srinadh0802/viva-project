@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function AdminUsersPage() {
   // This state stores all users loaded from the Flask backend
@@ -19,7 +20,7 @@ function AdminUsersPage() {
   // This function loads all users from the backend API
   const loadUsers = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/users");
+      const response = await fetch(`${API_BASE_URL}/api/users`);
       const data = await response.json();
 
       setUsers(data);
@@ -47,7 +48,7 @@ function AdminUsersPage() {
     setMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/users", {
+      const response = await fetch(`${API_BASE_URL}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -81,14 +82,22 @@ function AdminUsersPage() {
 
   return (
     <main className="dashboard-page">
-      <aside className="sidebar">
-        <h2>Viva Admin</h2>
+      <aside className="dashboard-sidebar">
+        <div className="sidebar-logo">
+          <span>VCS</span>
+          <p>Viva Coordination</p>
+        </div>
 
-        <nav>
+        <nav className="sidebar-nav">
           <Link to="/admin/dashboard">Dashboard</Link>
-          <Link to="/admin/users" className="active-link">
-            Manage Users
+          <Link to="/admin/users" className="active">
+            Users
           </Link>
+          <a>Rooms</a>
+          <a>Assignments</a>
+          <a>Viva Period</a>
+          <a>Generate Timetable</a>
+          <a>Final Schedule</a>
           <Link to="/login">Logout</Link>
         </nav>
       </aside>

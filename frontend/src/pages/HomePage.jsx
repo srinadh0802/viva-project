@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config";
 
 function HomePage() {
   const [backendStatus, setBackendStatus] = useState("Checking backend...");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/health")
+    fetch(`${API_BASE_URL}/api/health`)
       .then((response) => response.json())
       .then((data) => {
         setBackendStatus(data.message);

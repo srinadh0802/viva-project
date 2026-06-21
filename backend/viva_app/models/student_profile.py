@@ -25,6 +25,8 @@ class StudentProfile(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "full_name": self.user.full_name if self.user else None,
+            "email": self.user.email if self.user else None,
             "student_number": self.student_number,
             "programme": self.programme,
             "project_title": self.project_title
