@@ -56,7 +56,7 @@ function LoginPage() {
         <h1>Welcome Back</h1>
 
         <p className="auth-subtitle">
-          Sign-srinadh-in to access your viva scheduling dashboard.
+          Sign in to access your viva scheduling dashboard.
         </p>
 
         <form className="auth-form" onSubmit={handleLogin}>
